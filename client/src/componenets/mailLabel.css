@@ -1,0 +1,26 @@
+.mailLabel {
+    margin: 1px;
+    font-size: 0.9rem;
+    background-color: #dfe3e7;
+    height: 2.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.address {
+    position: relative;
+    left: 0;
+    margin : 0 15px;
+    width: 180px;
+    font-size: 0.95em;
+}
+
+.date {
+    position: absolute;
+    right: 0;
+    font-size: 0.9em;
+    text-align: right;
+    margin: 0 15px;
+    width: 10%;
+}

@@ -1,0 +1,94 @@
+.regPage {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regDiv {
+    font-size: 1.1rem;
+    width: 35%;
+    /* padding: 0 4rem; */
+    background-color: burlywood;
+}
+
+.regForm {
+    padding: 2em 0;
+    margin: 0 4rem;
+}
+
+.regfield {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    justify-content: space-between;
+}
+
+.regTextfield {
+    height: 2rem;
+    width: 100%;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    border: 1px solid white;
+    padding: 0 0.7rem;
+}
+
+.regTextfield:focus {
+    outline-width: 0;
+}
+
+.regSubmit {
+    font-size: 0.9rem;
+    padding: 0.2rem 1.3rem;
+    border-radius: 0.3rem;
+    border: none;
+    margin: 1rem 0;
+    float: right;
+}
+
+.regSubmit:focus {
+    outline-width: 0;
+    background-color: lightgray;
+}
+
+.regSubmit:hover {
+    background-color: #d5995d;
+}
+
+.regSubmit:active {
+    background-color: #dead7d;    ;
+}
+
+.regFirstName {
+    width: 35%;
+}
+
+.regLastName {
+    width: 45%;
+}
+
+.regDiv .logo {
+    margin: auto;
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+.regLoginDiv {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 2em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error {
+    background-color: red;
+    color: white;
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}

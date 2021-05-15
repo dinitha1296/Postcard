@@ -1,0 +1,88 @@
+.messageInputDiv {
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+}
+
+.messageInput {
+    height: 30px;
+}
+
+.textField {
+    width: calc(100% - 72px);
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 0 12px;
+    font-size: 14px;
+}
+
+.textField:focus {
+    outline-width: 0;
+}
+
+.submit {
+    color: white;
+    background-image: url(send.svg);
+    background-repeat: no-repeat;
+    background-color: peru;
+    background-position: 4.5px;
+    background-size: 20px;
+    border-radius: 50%;
+    border: none;
+    width: 27px;
+    height: 26px;
+    transition: background-color 100ms linear;
+}
+
+.submit:focus {
+    outline-width: 0;
+}
+
+.submit:hover {
+    background-color: #d5995d;
+}
+
+.submit:active {
+    background-color: #dead7d;    ;
+}
+
+.grinIcon {
+    width: 25px;
+}
+
+.emojiButton {
+    background-color: transparent;
+    font-size: 1em;
+    background-image: url(grin-regular.svg);
+    background-repeat: no-repeat;
+    background-position: 0;
+    background-size: 24px;
+    border-radius: 50%;
+    border: none;
+    width: 24px;
+    height: 24px;
+    box-shadow: 0px 0px 0px transparent;
+    transition: background-color 100ms linear;
+}
+
+.emojiButton:focus {
+    outline-width: 0;
+}
+
+.emojiButton:hover {
+    background-color: #ffffff;
+}
+
+.emojiButton:active {
+    background-color: #b0b0b0;    ;
+}
+
+.emojiPicker {
+    position: absolute;
+    bottom: 120px;
+    left: 240px;
+}

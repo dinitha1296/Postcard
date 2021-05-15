@@ -1,0 +1,9 @@
+.profileBtnDiv {
+    min-width: 5%;
+}
+
+.profileBtn {
+    background-color: inherit;
+    border: none;
+    font-size: 1.7em;
+}

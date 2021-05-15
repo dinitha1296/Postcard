@@ -1,0 +1,232 @@
+.newChatWindowContainer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(90, 90, 90, 0.5);
+    z-index: 1;
+}
+
+.newChatWindowContainer ul, .newChatWindowContainer li {
+    margin: 0;
+    padding: 0;
+}
+
+.newChatWindowDiv {
+    width: 70vw;
+    height: 70vh;
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+    border-radius: 10px;
+    top: 15vh;
+    left: 15vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.newChatWindowDiv * {
+    padding: 8px;
+}
+
+.newChatWindowTitleBar {
+    background-color: lightgray;
+    display: flex;
+    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    font-size: 22px;
+    height: 4rem;
+}
+
+.newChatWindowTitle {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.closeButton {
+    outline: none;
+    border: 2px solid grey;
+    background-color: transparent;
+    background-image: url(close.svg);
+    background-repeat: no-repeat;
+    /* background-position: 3.7px; */
+    background-size: 23px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    background-position: center center;
+    margin: 0 20px;
+}
+
+.newChatWindowContent {
+    font-size: 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.newChatWindowSearchSearch {
+    margin: 25px 0;
+    padding: 0 15px;
+    width: calc(100% - 32px);
+    border-radius: 1.5em;
+    border: 2px solid grey;
+    height: 3em;
+    font-size: inherit;
+    display: flex;
+    align-items: center;
+    /* position: absolute; */
+    justify-items: stretch;
+}
+
+.newChatWindowSearchSearch * {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    height: 100%;
+}
+
+.newChatWindowSearchSearchDiv {
+    flex: 1;
+    height: 100%;
+}
+
+.newChatWindowSearchSearchDiv input {
+    width: 100%;
+    font-size: 15px;
+}
+
+.newChatWindowSearchCloseDiv {
+    height: 100%;
+    width: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newChatWindowSearchCloseDiv button {
+    width: 1.5em;
+    height: 1.5em;
+    background-image: url(close.svg);
+    background-repeat: no-repeat;
+    background-size: 1.5em;
+    background-position: center center;
+}
+
+.newChatWindowSearchResult {
+    margin-bottom: 20px;
+    padding: 0;
+    flex: 1;
+    overflow: auto;
+}
+
+.newChatWindowSearchResult div {
+    padding: 0;
+    margin-right: 10px;
+}
+
+.newChatWindowSearchResult .onlyText {
+    font-size: 18px;
+    height: inherit;
+    display: flex;
+    padding: 10% 0;
+    justify-content: center;
+}
+
+.newChatWindowSearchResult .onlyText p {
+    transform: 0 -20px;
+}
+
+.newChatWindowSearch:focus {
+    outline: none;
+}
+
+.closeButton:hover {
+    background-color: hsl(0, 100%, 70%);
+}
+
+.closeButton:active {
+    background-color: red;
+}
+
+.newChatWindowSearchResultLabel {
+    width: 100%;
+    display: flex;
+    padding: 30px 10px;
+    height: 4.4rem;
+    border-radius: 0.8rem;
+    align-items: center;
+}
+
+.newChatWindowSearchResultLabel:hover {
+    background-color: rgb(245, 245, 245);
+}
+
+.newChatWindowSearchResultLabelProfilePic {
+    height: 70%;
+    border-radius: 50%;
+    margin: 0 20px;
+    padding: 0;
+}
+
+.newChatWindowSearchResultLabelNameDiv {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+}
+
+.newChatWindowSearchResultLabelNameDiv div {
+    margin: auto 0;
+    display: flex;
+    align-items: center;
+}
+
+.newChatWindowSearchResultLabelNameDiv div span{
+    padding: 0;
+}
+
+.newChatWindowSearchResultLabelName {
+    font-size: 16px;
+    flex: 4;
+}
+
+.newChatWindowSearchResultLabelUsername {
+    font-size: 12px;
+    flex: 3;
+}
+
+.newChatWindowSearchResultLabelNewChatBtn {
+    border: none;
+    margin: 0 20px;
+    background-color: rgb(200, 200, 200);
+    font-size: 40px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.newChatWindowSearchResultLabelNewChatBtn p {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.newChatWindowSearchResultLabelNewChatBtn:hover {
+    background-color: hsl(210, 13%, 60%);
+}
+
+.newChatWindowSearchResultLabelNewChatBtn:active {
+    background-color: hsl(210, 13%, 70%);
+}

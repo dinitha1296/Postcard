@@ -1,0 +1,9 @@
+.toggleMode {
+    min-width: 25%;
+}
+
+.toggleMode button {
+    background-color: inherit;
+    border: none;
+    font-size: 1.7em;
+}

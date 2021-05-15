@@ -1,0 +1,9 @@
+.settingsBtnDiv {
+    min-width: 5%;
+}
+
+.settingsBtn {
+    background-color: inherit;
+    border: none;
+    font-size: 2em;
+}

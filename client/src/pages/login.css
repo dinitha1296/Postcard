@@ -1,0 +1,85 @@
+.loginPage {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginDiv {
+    font-size: 1.1rem;
+    /* padding: 0 4em; */
+    width: 35%;
+    background-color: burlywood;
+}
+
+.loginForm {
+    padding: 2rem 0;
+    margin: 0 4rem;
+}
+
+.loginfield {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    justify-content: space-between;
+}
+
+.loginTextfield {
+    height: 2rem;
+    width: 100%;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    border: 1px solid white;
+    padding: 0 0.7rem;
+}
+
+.loginTextfield:focus {
+    outline-width: 0;
+}
+
+.loginSubmit {
+    font-size: 0.9rem;
+    padding: 0.2rem 1.3rem;
+    border-radius: 0.3rem;
+    border: none;
+    margin: 1rem 0;
+    float: right;
+}
+
+.loginSubmit:focus {
+    outline-width: 0;
+    background-color: lightgray;
+}
+
+.loginSubmit:hover {
+    background-color: #d5995d;
+}
+
+.loginSubmit:active {
+    background-color: #dead7d;    ;
+}
+
+.loginDiv .logo {
+    margin: auto;
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+.signInDiv {
+    font-size: 0.85rem;
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error {
+    background-color: red;
+    color: white;
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}

@@ -1,0 +1,9 @@
+.menu {
+    min-width: 5%;
+}
+
+.menuBtn {
+    background-color: inherit;
+    border: none;
+    font-size: 1.7em;
+}

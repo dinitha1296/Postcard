@@ -1,0 +1,6 @@
+.chatTitleBarDiv {
+    display: flex;
+    background-color: white;
+    color: gray;
+    align-items: center;
+}

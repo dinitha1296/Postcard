@@ -1,0 +1,43 @@
+.messageContainer {
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+}
+
+.chatContainer {
+    align-self: start;
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid white;
+}
+
+.chatList {
+    list-style: none;
+    padding: 0;
+}
+
+.chatMsgContainer {
+    height: 100%;
+    position: end;
+    width: 70%;
+    background-color: #ECE5DD;
+    border-left: 2px solid #d1cac1;
+}
+
+.messageListBin {
+    height: calc(100vh - 100px);
+    padding: 0 10px;
+    margin-right: 5px;
+    list-style: none;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.chatTitleBarDiv {
+    height: 60px;
+    padding: 0 20px;
+}
+
+.chatHeadLoadingDiv {
+    margin-top: 20%;
+}
