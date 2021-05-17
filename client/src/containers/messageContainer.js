@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { animateScroll } from "react-scroll";
-// import { io } from "socket.io-client";
 
 import Message from "../componenets/messageComponenets/message";
 import MessageTextField from "../componenets/messageComponenets/messageTextField";
@@ -11,7 +10,6 @@ import NewChatWindow from "../componenets/messageComponenets/newChatWindow";
 import Loading from "../componenets/loading";
 import "./messageContainer.css";
 import messageServices from "../services/messages.services";
-import axios from "axios";
 import socket from "../services/socket";
 
 
@@ -23,7 +21,6 @@ const ChatHeads = (props) => {
         props.changeChat(newChat);
     }
 
-    // axios.post('/echo', {location: "messageContainer.js", method: "chatHeads", this: this, selectedChat: selectedChat, changeChat: changeChat});
     const chatHeadList = props.chatHeads.map((ch) => {
         return (
             <li key={ch._id}>
@@ -77,15 +74,12 @@ class MessageContainer extends React.Component {
                 console.log(this.state);
             },
             (err) => {
-                axios.post('/echo', {locatoin: "messageContainer.js", err: err, line: "134", state: this.state});
                 console.log(err)
             }
         )
     };
     
     onSubmitMessage = (msg) => {
-        console.log("New msg");
-        console.log("Message : " + msg);
         messageServices.submitNewMessage(
             msg,
             JSON.parse(localStorage.getItem("user"))._id,
@@ -93,42 +87,18 @@ class MessageContainer extends React.Component {
         );
     }
     
-    // chatHeads = () => {
-
-    //     if (chatHeadsLoading) return <div><Loading /></div>;
-
-    //     const changeChat = (newChat) => {
-    //         this.changeChat(newChat);
-    //     }
-    //     const selectedChat = this.state.selectedChat;
-    //     // axios.post('/echo', {location: "messageContainer.js", method: "chatHeads", this: this, selectedChat: selectedChat, changeChat: changeChat});
-    //     const chatHeadList = this.props.chatHeads.map((ch) => {
-    //         return (
-    //             <li key={ch._id}>
-    //                 <ChatLabel 
-    //                     chatHead={ch} 
-    //                     onClick={changeChat} 
-    //                     isSelected = {ch._id === selectedChat._id}
-    //                 />
-    //             </li>
-    //         );
-    //     });
-    //     return <ul className="chatList">{chatHeadList}</ul>;
-    // }
-    
     chatContainer = () => {
         if (Object.keys(this.state.selectedChat).length > 0) {
-            // console.log(this.state)
-            console.log(this.state.selectedChat)
-            console.log("Index: " + this.state.selectedChat.chatIndex)
             const msgs = this.state.selectedChat.Messages.map(msg => {
-                // console.log(this.state.selectedChat.index + " " + msg.chatIndex);
-                // console.log(this.state.selectedChat.index === msg.chatIndex);
+                const sent = this.state.selectedChat.chatIndex === msg.chatIndex;
+                if (msg.body === "" && sent) return null;
                 return (
                     <li key={msg._id}>
                         <Message 
                             message = {msg} 
-                            sent = {this.state.selectedChat.chatIndex === msg.chatIndex}
+                            sent = {sent}
+                            onDelete = {this.deleteMessage}
+                            chatId = {this.state.selectedChat._id}
                         />
                     </li>
                 )
@@ -150,36 +120,7 @@ class MessageContainer extends React.Component {
                     <MessageTextField handleSubmit={this.onSubmitMessage} />
                 </div>
             );
-            // axios.post('/echo', {locatoin: "messageContainer.js", state: "slected", selectedChat});
-            /* messageServices.getChatMessages(
-                selectedChat._id,
-                (chat) => {
-                    if (!chat.Messages || chat.Messages.length() === 0) {
-                        axios.post('/echo', {locatoin: "messageContainer.js", state: "slected", selectedChat});
-                        return (
-                            <div className="chatMsgContainer">
-                                <MessageTextField handleSubmit={onSubmitMessage} />
-                            </div>
-                        );
-                    } else {
-                        axios.post('/echo', {locatoin: "messageContainer.js", state: "chatmsgs"});
-                        const Messages = chat.Messages.map(msg => <li key={msg._id}><Message message={msg} /></li>);
-                        return (
-                            <div className="chatMsgContainer">
-                                <ul className="messageListBin">
-                                    {Messages}
-                                </ul>
-                                <MessageTextField handleSubmit={onSubmitMessage} />
-                            </div>
-                        );
-                    }
-                },
-                (err) => {
-                    console.log(err)
-                }
-            ) */
         } else {
-            // axios.post('/echo', {locatoin: "messageContainer.js", state: "not selected", selectedChat})
             return <div className="chatMsgContainer" />
         }
     }
@@ -192,7 +133,6 @@ class MessageContainer extends React.Component {
                 Messages: [...this.state.selectedChat.Messages, ...msg]
             }   
         })
-        // axios.post('/echo', {locatoin: "messageContainer.js", state: this.state})
     }
 
     openNewChatWindow = () => {
@@ -232,24 +172,49 @@ class MessageContainer extends React.Component {
     }
 
     newChatWindow = () => {
-        if (this.state.newChatWindowOn) {
-            return (
-                <NewChatWindow 
-                    closeNewChatWindow={this.closeNewChatWindow}
-                    startANewChat={this.startANewChat}
-                />
-            );
-        }
+        return (
+            this.state.newChatWindowOn && 
+            <NewChatWindow 
+                closeNewChatWindow={this.closeNewChatWindow}
+                startANewChat={this.startANewChat}
+            />
+        );
+    }
+
+    deleteMessage = (chatId, msgId, deleteForAll) => {
+        const userID = localStorage.getItem('userId');
+        messageServices.deleteMessage(msgId, userID, chatId, deleteForAll);
+    }
+
+    updateDeletedMessage = (msgId) => {
+        const msgIndex = this.state.selectedChat.Messages.findIndex(msg => msg._id === msgId);
+        if (msgIndex === -1) return;
+        const message = JSON.parse(JSON.stringify(this.state.selectedChat.Messages[msgIndex]));
+        message.body = '';
+        this.setState({
+            ...this.state,
+            selectedChat: {
+                ...this.state.selectedChat,
+                Messages: [
+                    ...this.state.selectedChat.Messages.slice(0, msgIndex),
+                    message, ...this.state.selectedChat.Messages.slice(msgIndex + 1)
+                ]
+            }
+        });
     }
 
     componentDidMount() {
         socket.on("newMessage", (data) => {
-            // axios.post('/echo', {locatoin: "messageContainer.js", line: "190", state: "newMsg", "data": data});
-            // console.log
-            if (data.chatId === this.state.selectedChat._id){
-                this.updateMessage(data.msg)
+            if (data.chatId === this.state.selectedChat._id) {
+                this.updateMessage(data.msg);
             }
-            console.log("newMessage192")
+        });
+
+        socket.on('deletedMessage', data => {
+            console.log("Deleted message");
+            if (data.chatId === this.state.selectedChat._id) {
+                this.updateDeletedMessage(data.msgId);
+            }
         });
 
         this.setState({
@@ -274,45 +239,9 @@ class MessageContainer extends React.Component {
     }
 
     async componentDidUpdate() {
-        // const selectedChat = this.state.selectedChat
-        // if (this.state.selectedChat && Object.keys(this.state.selectedChat).length > 0) {
-        //     // axios.post('/echo', {locatoin: "messageContainer.js", line: "115", state: this.state});
-        //     await messageServices.getChatMessages(
-        //         (this.state.selectedChat._id),
-        //         (chat) => {
-        //             /* if (!chat.Messages || chat.Messages.length() === 0) {
-        //                 // axios.post('/echo', {locatoin: "messageContainer.js", state: "slected", selectedChat});
-        //                 return (
-        //                     <div className="chatMsgContainer">
-        //                         <MessageTextField handleSubmit={this.onSubmitMessage} />
-        //                     </div>
-        //                 );
-        //             }  */
-        //             if (chat.Messages && chat.Messages.length() > 0) {
-        //                 // 
-        //                 // const Messages = chat.Messages.map(msg => <li key={msg._id}><Message message={msg} /></li>);
-        //                 // return (
-        //                 //     <div className="chatMsgContainer">
-        //                 //         <ul className="messageListBin">
-        //                 //             {Messages}
-        //                 //         </ul>
-        //                 //         <MessageTextField handleSubmit={this.onSubmitMessage} />
-        //                 //     </div>
-        //                 // );
-        //                 this.updateMessage(...chat.Messages);
-        //                 axios.post('/echo', {locatoin: "messageContainer.js", line: "134", state: this.state});
-        //             }
-        //         },
-        //         (err) => {
-        //             axios.post('/echo', {locatoin: "messageContainer.js", err: err, line: "134", state: this.state});
-        //             console.log(err)
-        //         }
-        //     )
-        // }
         
         this.scrollToBottom("messageListBin");
         socket.on('uncaughtException', function (exception) {
-            // handle or ignore error
             console.log(exception);
         });
     }
@@ -323,9 +252,6 @@ class MessageContainer extends React.Component {
                 <div className="chatContainer">
                     <ChatToolsBar newChatWindowOn={this.state.newChatWindowOn} openNewChatWindow={this.openNewChatWindow}/>
                     {this.newChatWindow()}
-                    {/* <ul className="chatList">
-                        {this.chatHeads()}
-                    </ul> */}
                     <ChatHeads 
                         isLoading={this.state.chatHeadsLoading}
                         selectedChat={this.state.selectedChat}

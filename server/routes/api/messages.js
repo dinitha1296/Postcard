@@ -192,14 +192,14 @@ router.post('/chat', ensureAuthenticated, (req, res) => {
     console.log("Chat req : " + req.body.chatId); 
     Chat.findOne({_id: req.body.chatId}, (err, chat) => {
         if (err) {
-            console.log("Chat req : " + err);
+            console.log("Error: at /chat");
+            console.log(err)
             res.status(400).json({error: "Error retrieving the chat"});
         } else if (!chat) {
-            console.log("Chat req : " + chat);
+            console.log("No chat found");
             res.status(400).json({error: "Chat couldn't be found"});
         } else {
-            console.log("Chat req : ");
-            console.log(chat);
+
             if (chat.Messages && chat.Messages.length > 0) {
                 Messages.aggregate(
                     [
@@ -210,21 +210,20 @@ router.post('/chat', ensureAuthenticated, (req, res) => {
                             console.log(err);
                             res.status(400).json({ error: "Error obtaining user data" });
                         } else {
-                            // console.log("Chat req : " + messages);
-                            // chat['abcd'] = 'abcd';
-                            // console.log('abcd');
-                            chat._doc.Messages = messages;
-                            chat._doc.chatIndex = chat.participants.indexOf(req.body.userId)
-                            // const ind = chat.participants.indexOf(req.body.userId)
-                            // chat.chatIndex = ind
-                            // chat.abcd = 'abcd'
-                            // console.log(chat)
-                            // console.log(Object.keys(chat))
-                            // console.log(Object.values(chat))
-                            // console.log(chat.chatIndex)
+                            const chatIndex = (chat._doc.participants.indexOf(req.body.userId));
+                            const updatedMessages = messages
+                                .filter(msg => msg.body || chatIndex !== msg.chatIndex)
+                                .map(msg => {
+                                    if (msg.delete_for.includes(req.body.userId)) {
+                                        return {...msg, body: ""};
+                                    }
+                                    return msg;
+                                });
+
+                            chat._doc.Messages = updatedMessages;
+                            chat._doc.chatIndex = chatIndex;
                             res.status(200).json(chat);
                             console.log("\nChat found\n")
-                            // console.log(chat)
                         }
                     }
                 )

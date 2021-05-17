@@ -95,6 +95,42 @@ const socket = (users, rooms, io) => socket => {
         })
     })
 
+    socket.on('deleteMessage', async data => {
+        const userConfirmed = users[socket.id].id === data.userId;
+        const chatConfirmed = users[socket.id].chats.includes(data.chatId);
+        if (!userConfirmed || !chatConfirmed) return;
+
+        const chat = await Chat.findById(data.chatId);
+        const message = await Message.findById(data.msgId)
+        if (!message.body) return;
+
+        const chatIndex = chat.participants.indexOf(data.userId);
+        const isOwner = chatIndex === message.chatIndex;
+        if (!isOwner && data.deleteForAll) return;
+
+        if (data.deleteForAll) {
+            await Message.updateOne(
+                {_id: message._id},
+                {$set: {body: '', delete_for: []}});
+            
+            io.to(data.chatId).emit("deletedMessage", {
+                chatId: data.chatId,
+                msgId: data.msgId
+            });
+        } else {
+            if (message.delete_for.includes(data.userId)) return
+            await Message.updateOne(
+                {_id: message._id},
+                {$set: {delete_for: [message.delete_for, data.userId]}}
+            );
+            
+            io.to(socket.id).emit("deletedMessage", {
+                chatId: data.chatId,
+                msgId: data.msgId
+            });
+        }
+    });
+
     socket.on('uncaughtException', function (exception) {
         // handle or ignore error
         console.log(exception);

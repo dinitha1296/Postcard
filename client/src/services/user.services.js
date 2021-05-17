@@ -7,8 +7,8 @@ const login = (username, password, next, err) => {
             password
         })
         .then((res) => {
-            // axios.post('/echo',res.data.user);
-            localStorage.setItem('user', JSON.stringify(res.data.user))
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            localStorage.setItem('userId', res.data.user._id);
             next(res.data.user);
         })
         .catch(error => err(error.response.data.error));
@@ -18,7 +18,6 @@ const logout = (next, err) => {
     axios
         .get('api/user/logout')
         .then((res) => {
-            // axios.post('/echo',res.data.user);
             localStorage.removeItem('user');
             next(res.data);
         })

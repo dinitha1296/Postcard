@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
 
 import "./newChatWindow.css";
 import defaultProfilePic from "./profilePicDefault.svg";
@@ -157,27 +157,32 @@ const NewChatWindowSearch = (props) => {
 
 const NewChatWindow = (props) => {
 
-    // const [
-    //     newChatWindowContentStatus, 
-    //     changeNewChatWindowContentStatus] 
-    // = useState(NewChatWindowContentStatusEnum.EMPTY);
+    // let newChatRef = React.createRef();
 
-    // const [contentData, changeContentData] = useState("");
+    const handleOutsideClick = (e) => {
+        if (document.getElementById("newChatWindowDiv").contains(e.target)) {
+            return;
+        }
+        props.closeNewChatWindow()
+    }
+    const handleKeyPress = (e) => {
+        if (e.key === "Escape") props.closeNewChatWindow()
+    }
 
-    // const renderNewSearch = () => {}
+    useEffect(() => {
 
-    // const renderContent = () => {
+        document.addEventListener('mousedown', handleOutsideClick, false);
+        document.addEventListener('keydown', handleKeyPress, false);
 
-    //     const statusEnum = NewChatWindowContentStatusEnum;
-
-    //     switch (newChatWindowContentStatus) {
-    //         case statusEnum.SEARCH: 
-    //     }
-    // }
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick, false);
+            document.removeEventListener('keydown', handleKeyPress, false);
+        }
+    });
 
     return(
         <div className="newChatWindowContainer">  
-            <div className="newChatWindowDiv">
+            <div id="newChatWindowDiv" className="newChatWindowDiv">
                 <div className="newChatWindowTitleBar">
                     <p className="newChatWindowTitle">Start a new chat</p>
                     <button className="closeButton" onClick={props.closeNewChatWindow} />

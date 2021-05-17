@@ -1,5 +1,5 @@
 .message {
-    background-color: #f5d4af;
+    background-color: hsl(32, 78%, 82%);
     padding: 10px;
     margin: 10px 5px;
     border-radius: 10px;
@@ -7,6 +7,8 @@
     min-width: 20%;
     font-size: 14px;
     box-shadow: 0px 0px 5px grey;
+	position: relative;
+	overflow: visible;
 }
 
 .time {
@@ -17,11 +19,12 @@
 .container {
     width: 100%;
     display: inline-block;
+	overflow: visible;
 }
 
 .right {
     float: right;
-    background-color:#f9f0e7;
+    background-color:hsl(30, 60%, 94%);
 }
 
 .left {
@@ -67,4 +70,73 @@ span.emoji-inner {
 img.emoji {
 	width: 1em;
 	height: 1em;
+}
+
+.messageMenuBtn {
+	font-size: 8px;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	border: none;
+	background-color: inherit;
+	position: absolute;
+	right: 10px;
+	visibility: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.message:hover .messageMenuBtn {
+	background-color: hsl(31, 69%, 88%);
+	visibility: visible;
+}
+
+.message:hover .messageMenuBtn:hover {
+	background-color: hsl(30, 60%, 94%);
+}
+
+.message:hover .messageMenuBtn:active {
+	background-color: hsl(0, 0%, 100%);
+}
+
+.right.message:hover .messageMenuBtn:hover {
+	background-color: hsl(32, 78%, 82%);
+}
+
+.right.message:hover .messageMenuBtn:active {
+	background-color: #f7c78d;
+}
+
+.messageMenu {
+	background-color: hsl(0, 0%, 96%);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	right: 0;
+	top: 30px;
+	justify-content: center;
+	z-index: 100;
+	width: max-content;
+	height: auto;
+	box-shadow: 0px 0px 5px grey;
+}
+
+.messageMenu hr {
+	width: 80%;
+	margin: auto;
+	border: none;
+	border-top: 1px solid black;
+}
+
+.messageMenuItem {
+	display: flex;
+	padding: 6px 20px;
+	align-items: center;
+	justify-content: center;
+}
+
+.messageMenuItem:hover {
+	background-color: hsl(0, 0%, 90%);
 }

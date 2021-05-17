@@ -1,8 +1,5 @@
 import axios from "axios";
-// import openSocket from "socket.io-client"
 import socket from "./socket";
-
-// const socket = openSocket()
 
 const getAllChats = (userId, next, err) => {
     axios
@@ -38,6 +35,15 @@ const submitNewMessage = (msg, userId, chat) => {
         user: userId,
         chat: chat,
         message: msg
+    });
+}
+
+const deleteMessage = (msgId, userId, chatId, deleteForAll) => {
+    socket.emit("deleteMessage", {
+        msgId,
+        userId,
+        chatId,
+        deleteForAll
     })
 }
 
@@ -65,6 +71,7 @@ const startNewChat = (otherPersonsId, userId, next, err) => {
 const messageServices = {
     getChatMessages,
     submitNewMessage,
+    deleteMessage,
     searchNewUsers,
     getAllChats,
     startNewChat
