@@ -1,5 +1,24 @@
 import axios from "axios";
+import { Service } from "axios-middleware";
+
 import socket from "./socket";
+import userServices from "./user.services";
+import store from "../store";
+import { logoutAction } from "../actions/authActions";
+
+const service = new Service(axios);
+
+service.register({
+    onResponseError(error) {
+        const re = JSON.parse(error.response.data);
+        console.log(re && re.logout);
+        if (re && re.logout) {
+            userServices.logout((data) => {
+                store.dispatch(logoutAction());
+            }, (err) => {});
+        }
+    }
+});
 
 const getAllChats = (userId, next, err) => {
     axios

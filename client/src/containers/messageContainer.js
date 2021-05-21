@@ -271,7 +271,6 @@ class MessageContainer extends React.Component {
     onBack = () => this.setState({...this.state, selectedChat: {}});
 
     render() {
-        console.log(window.innerWidth);
         return (
             <div className="messageContainer">
                 {(!this.props.isMobile || !this.chatSelected()) && this.messageContainer(this.selectWidth())}
