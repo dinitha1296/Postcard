@@ -25,31 +25,33 @@ const Login = (props) => {
 
     return(
         <div className="loginPage">
-            <div className="loginDiv">
-                {error ? <div className="error">{error}</div> : <p/>}
-                <form className="loginForm" onSubmit={e => submitForm(e)}>
+            <div>
+                <div className="loginDiv">
+                    {error ? <div className="error">{error}</div> : <p/>}
                     <Logo className="logo"/>
-                    <div className="loginfield">
-                        <input 
-                            type="text" 
-                            className="loginTextfield" 
-                            placeholder="Username" 
-                            onChange={e => setUsername(e.target.value)}
-                        />
+                    <form className="loginForm" onSubmit={e => submitForm(e)}>
+                        <div className="loginfield">
+                            <input 
+                                type="text" 
+                                className="loginTextfield" 
+                                placeholder="Username" 
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                        </div>
+                        <div className="loginfield">
+                            <input 
+                                type="password" 
+                                className="loginTextfield regPassword" 
+                                placeholder="Password" 
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <input type="submit" className="loginSubmit" value="Log In" />
+                    </form>
+                    <hr />
+                    <div className="signInDiv">
+                        <p>New to Postcard? <Link to={'/register'}>Sign in</Link></p>
                     </div>
-                    <div className="regfield">
-                        <input 
-                            type="password" 
-                            className="loginTextfield regPassword" 
-                            placeholder="Password" 
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <input type="submit" className="loginSubmit" value="Log In" />
-                </form>
-                <hr />
-                <div className="signInDiv">
-                    <p>New to Postcard? <Link to={'/register'}>Sign in</Link></p>
                 </div>
             </div>
         </div>

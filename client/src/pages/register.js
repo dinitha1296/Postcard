@@ -62,59 +62,60 @@ const Register = (props)  => {
 
     return(
         <div className="regPage">
-            {/* submitForm() */}
-            <div className="regDiv">
-                {error ? <div className="error">{error}</div> : <p/>}
-                <form className="regForm" onSubmit={e => submitForm(e)}>
-                    <Logo className="regLogo"/>
-                    <div className="regfield">
-                        <input 
-                            type="text" 
-                            value={firstName}
-                            className="regTextfield regFirstName" 
-                            placeholder="First Name"
-                            onChange={e => onNameEnter(e, firstName, setFirstName)}
-                        />
-                        <input 
-                            type="text" 
-                            value={lastName}
-                            className="regTextfield regLastName" 
-                            placeholder="Last Name (optional)"
-                            onChange={e => onNameEnter(e, lastName, setLastName)}
-                        />
+            <div>
+                <div className="regDiv">
+                    {error ? <div className="error">{error}</div> : <p/>}
+                    <Logo className="logo"/>
+                    <form className="regForm" onSubmit={e => submitForm(e)}>
+                        <div className="regfield regFieldNames">
+                            <input 
+                                type="text" 
+                                value={firstName}
+                                className="regTextfield regFirstName" 
+                                placeholder="First Name"
+                                onChange={e => onNameEnter(e, firstName, setFirstName)}
+                            />
+                            <input 
+                                type="text" 
+                                value={lastName}
+                                className="regTextfield regLastName" 
+                                placeholder="Last Name (optional)"
+                                onChange={e => onNameEnter(e, lastName, setLastName)}
+                            />
+                        </div>
+                        <div className="regfield">
+                            <input 
+                                type="text" 
+                                value={username}
+                                className="regTextfield" 
+                                placeholder="Username"
+                                onChange={e => onUsernameEnter(e)}    
+                            />
+                        </div>
+                        <div className="regfield">
+                            <input 
+                                type="password"
+                                value={password} 
+                                className="regTextfield regPassword" 
+                                placeholder="Password" 
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <div className="regfield">
+                            <input 
+                                type="password" 
+                                value={passwordConf}
+                                className="regTextfield regPasswordRe" 
+                                placeholder="Re-Enter Password" 
+                                onChange={e => setPasswordConf(e.target.value)}
+                            />
+                        </div>
+                        <input type="submit" className="regSubmit" value="Sign In" />
+                    </form>
+                    <hr />
+                    <div className="regLoginDiv">
+                        <p>Already have an account ? <Link to={'/login'}>Log in</Link></p>
                     </div>
-                    <div className="regfield">
-                        <input 
-                            type="text" 
-                            value={username}
-                            className="regTextfield" 
-                            placeholder="Username"
-                            onChange={e => onUsernameEnter(e)}    
-                        />
-                    </div>
-                    <div className="regfield">
-                        <input 
-                            type="password"
-                            value={password} 
-                            className="regTextfield regPassword" 
-                            placeholder="Password" 
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <div className="regfield">
-                        <input 
-                            type="password" 
-                            value={passwordConf}
-                            className="regTextfield regPasswordRe" 
-                            placeholder="Re-Enter Password" 
-                            onChange={e => setPasswordConf(e.target.value)}
-                        />
-                    </div>
-                    <input type="submit" className="regSubmit" value="Sign In" />
-                </form>
-                <hr />
-                <div className="regLoginDiv">
-                    <p>Already have an account ? <Link to={'/login'}>Log in</Link></p>
                 </div>
             </div>
         </div>

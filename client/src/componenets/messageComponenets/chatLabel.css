@@ -3,7 +3,7 @@
     width: 100%;
     height: 4em;
     border: 0px;
-    border-bottom: 2px solid lightgrey;
+    border-bottom: 0.1em solid lightgrey;
     line-height: 3em;
     align-items: center;
 }

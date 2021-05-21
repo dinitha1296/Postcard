@@ -30,9 +30,9 @@ const Message = (props) => {
     const menuBtnStyle = (e) => {
         if (menuSelected) {
             return ({
-                backgroundColor: `${props.sent ? "#f7c78d" : "#ffffff"}`,
+                // backgroundColor: `${props.sent ? "#f7c78d" : "#ffffff"}`,
                 visibility: 'visible',
-                boxShadow: "0px 0px 5px grey"
+                // boxShadow: "0px 0px 5px grey"
             });
         }
         return null;
@@ -71,6 +71,7 @@ const Message = (props) => {
                 id={`message_${props.message._id}`}
                 className={`message${props.sent ? ' right' : ' left'}`} 
                 style={{whiteSpace: 'pre-wrap', overflowWrap: 'break-word'}}
+                onClick={onMenuBtnClcik}
             >
                 <button 
                     className="messageMenuBtn"

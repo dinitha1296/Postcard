@@ -1,5 +1,6 @@
 import React from "react";
 import { animateScroll } from "react-scroll";
+import { connect } from "react-redux"
 
 import Message from "../componenets/messageComponenets/message";
 import MessageTextField from "../componenets/messageComponenets/messageTextField";
@@ -87,7 +88,7 @@ class MessageContainer extends React.Component {
         );
     }
     
-    chatContainer = () => {
+    chatMsgContainer = (style) => {
         if (Object.keys(this.state.selectedChat).length > 0) {
             const msgs = this.state.selectedChat.Messages.map(msg => {
                 const sent = this.state.selectedChat.chatIndex === msg.chatIndex;
@@ -109,10 +110,12 @@ class MessageContainer extends React.Component {
 
 
             return (
-                <div id="chatMsgContainer" className="chatMsgContainer">
+                <div id="chatMsgContainer" className="chatMsgContainer" style={style}>
                     <ChatTitleBar 
                         chatTitle={firstName + (lastName ? " " + lastName : "")} 
                         className="chatTitleBar"
+                        isMobile={this.props.isMobile}
+                        onBack={this.onBack}
                     />
                     <ul id="messageListBin" className="messageListBin">
                         {msgs}
@@ -121,8 +124,23 @@ class MessageContainer extends React.Component {
                 </div>
             );
         } else {
-            return <div className="chatMsgContainer" />
+            return <div className="chatMsgContainer" style={style}/>
         }
+    }
+
+    messageContainer = (style) => {
+        return (
+            <div className="chatContainer" style={style}>
+                <ChatToolsBar newChatWindowOn={this.state.newChatWindowOn} openNewChatWindow={this.openNewChatWindow}/>
+                {this.newChatWindow()}
+                <ChatHeads 
+                    isLoading={this.state.chatHeadsLoading}
+                    selectedChat={this.state.selectedChat}
+                    chatHeads={this.state.chatHeads}
+                    changeChat={this.changeChat.bind(this)}
+                />
+            </div>
+        );
     }
 
     updateMessage = (...msg) => {
@@ -246,23 +264,27 @@ class MessageContainer extends React.Component {
         });
     }
 
+    chatSelected = () => Object.keys(this.state.selectedChat).length !== 0;
+
+    selectWidth = () => this.props.isMobile ? {width: "100%"} : null;
+
+    onBack = () => this.setState({...this.state, selectedChat: {}});
+
     render() {
+        console.log(window.innerWidth);
         return (
             <div className="messageContainer">
-                <div className="chatContainer">
-                    <ChatToolsBar newChatWindowOn={this.state.newChatWindowOn} openNewChatWindow={this.openNewChatWindow}/>
-                    {this.newChatWindow()}
-                    <ChatHeads 
-                        isLoading={this.state.chatHeadsLoading}
-                        selectedChat={this.state.selectedChat}
-                        chatHeads={this.state.chatHeads}
-                        changeChat={this.changeChat.bind(this)}
-                    />
-                </div>
-                {this.chatContainer()}
+                {(!this.props.isMobile || !this.chatSelected()) && this.messageContainer(this.selectWidth())}
+                {(!this.props.isMobile || this.chatSelected()) && this.chatMsgContainer(this.selectWidth())}
             </div>
         );
     }
 }
 
-export default MessageContainer;
+const mapStateToProps = (state) => {
+    return {
+        isMobile: state.isMobile
+    }
+}
+
+export default connect(mapStateToProps)(MessageContainer);

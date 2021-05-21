@@ -5,7 +5,6 @@
 }
 
 .chatContainer {
-    align-self: start;
     width: 30%;
     height: 100%;
     border-right: 1px solid white;
@@ -18,28 +17,22 @@
 
 .chatMsgContainer {
     height: 100%;
-    position: end;
     width: 70%;
     background-color: #ECE5DD;
     border-left: 2px solid #d1cac1;
+    display: flex;
+    flex-direction: column;
 }
 
 .messageListBin {
-    height: calc(100vh - 100px);
-    padding: 0 10px;
-    margin-right: 5px;
+    height: calc(100% - 6.6em);
+    padding: 0 1em;
     list-style: none;
-    overflow: scroll;
-    overflow-x: hidden;
+    overflow: auto;
 }
 
 .messageListBin li {
     overflow: visible;
-}
-
-.chatTitleBarDiv {
-    height: 60px;
-    padding: 0 20px;
 }
 
 .chatHeadLoadingDiv {

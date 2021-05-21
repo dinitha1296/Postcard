@@ -2,23 +2,23 @@
     display: flex;
     align-items: center;
     background-color:slategray;
-    height: 60px;
-    padding: 0 20px;
+    height: 4em;
+    padding: 0 1.5em;
 }
 
 .chatToolsBarBtn {
     outline: none;
     border: none;
     background-color: transparent;
-    height: 35px;
-    width: 35px;
+    height: 2.5em;
+    width: 2.5em;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     position: relative;
-    right: calc(-100% + 40px);
+    right: calc(-100% + 2.5em);
 }
 
 .chatToolsBarBtn:hover {
@@ -30,7 +30,7 @@
 }
 
 .toolBarIcon {
-    font-size: 58px;
+    font-size: 4em;
     color: white;
     position: relative;
 }

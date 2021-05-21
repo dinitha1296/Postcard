@@ -3,4 +3,35 @@
     background-color: white;
     color: gray;
     align-items: center;
+    padding: 0 0.75em;
+    height: 4em;
+}
+
+.chatTitleBackBtn {
+    background-color: white;
+    font-size: 2em;
+    border-radius: 50%;
+    height: 1.2em;
+    width: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.chatTitleBackBtn img {
+    height: 70%;
+    width: 70%;
+}
+
+.chatTitleBackBtn:hover {
+    background-color: lightgray;
+}
+
+.chatTitleBackBtn:active {
+    background-color: gray;
+}
+
+.chatTitle {
+    margin: 0 0.75em;
 }

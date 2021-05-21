@@ -230,3 +230,12 @@
 .newChatWindowSearchResultLabelNewChatBtn:active {
     background-color: hsl(210, 13%, 70%);
 }
+
+@media (max-width: 600px) {
+    .newChatWindowDiv {
+        width: 96vw;
+        height: 96vh;
+        top: 2vh;
+        left: 2vw;
+    }
+}

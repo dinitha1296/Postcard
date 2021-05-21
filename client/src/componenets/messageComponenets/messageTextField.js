@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Picker from "emoji-picker-react";
 import { EmojiConvertor } from "emoji-js";
+import sendIcon from './send.svg';
 // import { Twemoji } from "react-emoji-render";
 
 import "./messageTextField.css";
@@ -32,8 +33,9 @@ function MessageTextField(props) {
     return (
         <form className="messageInputDiv" onSubmit={handleSubmit}>
             
-            <button className="emojiButton" onClick={onEmojiPickerClick} type="button"></button>
-            {pickerOpen && <div className="emojiPicker"><Picker onEmojiClick={onEmojiPick}/></div>}
+            <button className="emojiButton" onClick={onEmojiPickerClick} type="button">
+                {pickerOpen && <div className="emojiPicker"><Picker onEmojiClick={onEmojiPick}/></div>}
+            </button>
             {/* {console.log(emoji.replace_unified(input))} */}
             <input
                 type="text" 
@@ -43,7 +45,7 @@ function MessageTextField(props) {
                 placeholder="Write a message..."
                 InputProps={{startAdornment: <input type="submit" value="" className="messageInput submit"/>}}
             />
-            <input type="submit" value="" className="messageInput submit" disabled={!input} hidden={!input}/>
+            <button type="submit" value="" className="messageInput submit" disabled={!input} hidden={!input}><img src={sendIcon} alt="a" /></button>
         </form>
     );
 }

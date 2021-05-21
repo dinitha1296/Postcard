@@ -1,19 +1,19 @@
 .message {
     background-color: hsl(32, 78%, 82%);
-    padding: 10px;
-    margin: 10px 5px;
+    padding: 1em;
+    margin: 1em 0.5em;
     border-radius: 10px;
     max-width: 60%;
     min-width: 20%;
-    font-size: 14px;
-    box-shadow: 0px 0px 5px grey;
+    font-size: 0.9em;
+    box-shadow: 0px 0px 0.4em grey;
 	position: relative;
 	overflow: visible;
 }
 
 .time {
     text-align: right;
-    font-size: 12px;
+    font-size: 0.85em;
 }
 
 .container {
@@ -73,7 +73,7 @@ img.emoji {
 }
 
 .messageMenuBtn {
-	font-size: 8px;
+	font-size: 0.7em;
 	height: 16px;
 	width: 16px;
 	border-radius: 50%;
@@ -88,11 +88,11 @@ img.emoji {
 }
 
 .message:hover .messageMenuBtn {
-	background-color: hsl(31, 69%, 88%);
+	/* background-color: hsl(31, 69%, 88%); */
 	visibility: visible;
 }
 
-.message:hover .messageMenuBtn:hover {
+/* .message:hover .messageMenuBtn:hover {
 	background-color: hsl(30, 60%, 94%);
 }
 
@@ -106,18 +106,18 @@ img.emoji {
 
 .right.message:hover .messageMenuBtn:active {
 	background-color: #f7c78d;
-}
+} */
 
 .messageMenu {
 	background-color: hsl(0, 0%, 96%);
-	border-radius: 5px;
+	border-radius: 0.5em;
 	display: flex;
 	flex-direction: column;
 	position: absolute;
 	right: 0;
-	top: 30px;
+	top: 2.4em;
 	justify-content: center;
-	z-index: 100;
+	z-index: 1;
 	width: max-content;
 	height: auto;
 	box-shadow: 0px 0px 5px grey;
@@ -132,7 +132,7 @@ img.emoji {
 
 .messageMenuItem {
 	display: flex;
-	padding: 6px 20px;
+	padding: 0.5em 1.3em;
 	align-items: center;
 	justify-content: center;
 }
