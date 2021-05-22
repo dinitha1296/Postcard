@@ -11,6 +11,7 @@ const expressSession = require('express-session')({
     resave: false,
     saveUninitialized: false
 });
+const path = require('path');
 require('dotenv').config();
 
 const myDB = require('./connection.js');
@@ -50,6 +51,8 @@ myDB(async client => {
 // api routes
 app.use('/', routes);
 
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 app.get('/hello', (req, res) => {
     console.log('Hello req recieved');
     res.json({message: 'hello'});
@@ -60,6 +63,10 @@ app.post('/echo', (req, res) => {
     console.log(req.body);
     res.status(200);
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 // listen
 const server = app.listen(port, () => console.log(`Listning on localhost: ${port}`));
