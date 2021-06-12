@@ -1,7 +1,7 @@
 # Postcard
 A messaging app built using MERN stack.
 
-To find a live version of the app [here](postcard1.herokuapp.com).
+To find a live version of the app [here](https://postcard1.herokuapp.com).
 
 To test the app without creating new accounts use following accounts:
   
