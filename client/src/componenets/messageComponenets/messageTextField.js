@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Picker from "emoji-picker-react";
 import { EmojiConvertor } from "emoji-js";
 import sendIcon from './send.svg';
@@ -7,7 +7,27 @@ import sendIcon from './send.svg';
 import "./messageTextField.css";
 // import grin from './grin-regular.svg'
 
-function MessageTextField(props) {
+const EmojiPicker = (props) => {
+    
+    const ref = useRef(null);
+
+    const onOutsideClick = (e) => {
+        if (ref.current.contains(e.target)) return;
+        props.onClose();
+    }
+
+    useEffect(() => {
+        window.addEventListener('mousedown', onOutsideClick, false);
+        return () => window.removeEventListener('mousedown', onOutsideClick, false);
+    });
+
+    return (
+        <div className="emojiPicker" ref={ref}>
+            <Picker onEmojiClick={props.onEmojiPick}/>
+        </div>);
+}
+
+const MessageTextField = (props) => {
     
     const [input, changeInput] = useState("")
     const [pickerOpen, changePickerOpen] = useState(false);
@@ -34,7 +54,7 @@ function MessageTextField(props) {
         <form className="messageInputDiv" onSubmit={handleSubmit}>
             
             <button className="emojiButton" onClick={onEmojiPickerClick} type="button">
-                {pickerOpen && <div className="emojiPicker"><Picker onEmojiClick={onEmojiPick}/></div>}
+                {pickerOpen && <EmojiPicker onEmojiPick={onEmojiPick} onClose={() => changePickerOpen(false)}/>}
             </button>
             {/* {console.log(emoji.replace_unified(input))} */}
             <input

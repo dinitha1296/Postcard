@@ -30,7 +30,7 @@ async function main(callback) {
         .then(() => console.log('Mongodb connected'))
         .catch(err => {
             console.error(err);
-            throw new Error('Unable to connect to the database');
+            // throw new Error('Unable to connect to the database');
         })
 }
 
